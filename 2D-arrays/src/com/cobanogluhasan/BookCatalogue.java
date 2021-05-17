@@ -47,7 +47,48 @@ public class BookCatalogue {
         return this.feePerLateDay;
     }
 
-    public static void main(String[] args) {
+    public void nextDay() {
+        currentDay++;
+    }
 
+    public void setCurrentDay(int day) {
+        this.currentDay = day;
+    }
+
+    public void checkOutBook(String title) {
+        Book book = getBook(title);
+        if (book.getIsCheckedOut()) {
+            bookAlreadyCheckedOut(book);
+        } else {
+            book.setCheckedOut(true, currentDay);
+            System.out.println("checked out. " + title + "its due on day:" + (getCurrentDay() + getLentgthOfCheckoutPeriod()) + ".");
+        }
+    }
+
+    public void returnBook(String title) {
+        Book book = getBook(title);
+        int daysLate = currentDay - (book.dayCheckedOut + getLentgthOfCheckoutPeriod());
+        if (daysLate > 0) {
+            System.out.println("you owe the library $" + daysLate * getFeePerLateDay() + (getInitialLateFee())
+                    + " the book " + daysLate + " late!");
+        } else System.out.println("Book returned!");
+        book.setCheckedOut(false, -1);
+    }
+
+    public void bookAlreadyCheckedOut(Book book) {
+        System.out.println("The book" + book.getTitle() + " is already checkout out. IT should  be back at " +
+                (getLentgthOfCheckoutPeriod() + book.getDayCheckedOut()));
+    }
+
+    public static void main(String[] args) {
+        Map<String, Book> collection = new HashMap<>();
+        Book book = new Book("harry potter", 123, 546);
+        collection.put("harry", book);
+        BookCatalogue catalogue = new BookCatalogue(collection);
+        catalogue.checkOutBook("harry");
+        catalogue.nextDay();
+        catalogue.nextDay();
+        catalogue.checkOutBook("harry");
+        catalogue.setCurrentDay(2);
     }
 }

@@ -26,6 +26,10 @@ public class Book {
         return this.pageNumber;
     }
 
+    public int getDayCheckedOut() {
+        return dayCheckedOut;
+    }
+
     public boolean getIsCheckedOut() {
         return this.isCheckedOut;
     }
