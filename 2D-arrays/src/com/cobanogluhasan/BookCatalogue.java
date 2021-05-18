@@ -81,14 +81,6 @@ public class BookCatalogue {
     }
 
     public static void main(String[] args) {
-        Map<String, Book> collection = new HashMap<>();
-        Book book = new Book("harry potter", 123, 546);
-        collection.put("harry", book);
-        BookCatalogue catalogue = new BookCatalogue(collection);
-        catalogue.checkOutBook("harry");
-        catalogue.nextDay();
-        catalogue.nextDay();
-        catalogue.checkOutBook("harry");
-        catalogue.setCurrentDay(2);
+        System.out.println(SumOfSquare.sumOfSquares(84));
     }
 }
